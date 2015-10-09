@@ -6,3 +6,4 @@ bin
 *.iws
 *.ipr
 .idea
+.gradle

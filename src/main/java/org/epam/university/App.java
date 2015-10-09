@@ -1,7 +1,7 @@
 package org.epam.university;
 
 import org.epam.university.domain.Client;
-import org.epam.university.logger.ConsoleEventLogger;
+import org.epam.university.logger.IEventLogger;
 
 /**
  * @author Andrei Kuzniatsou
@@ -9,18 +9,14 @@ import org.epam.university.logger.ConsoleEventLogger;
 public class App {
 
     private Client client;
-    private ConsoleEventLogger eventLogger;
+    private IEventLogger eventLogger;
 
-    public static void main(String[] args) {
-        App app = new App();
-
-        app.client = new Client("1", "John Smith");
-        app.eventLogger = new ConsoleEventLogger();
-
-        app.logEvent("Some event for user 1");
+    public App(Client client, IEventLogger eventLogger) {
+        this.client = client;
+        this.eventLogger = eventLogger;
     }
 
-    private void logEvent(String msg) {
+    public void logEvent(String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
         eventLogger.logEvent(message);
     }
