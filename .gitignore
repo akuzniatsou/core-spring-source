@@ -1,1 +1,9 @@
-# Created by .ignore support plugin (hsz.mobi)
+build
+bin
+
+# IntelliJ project files
+*.iml
+*.iws
+*.ipr
+.idea
+.gradle
