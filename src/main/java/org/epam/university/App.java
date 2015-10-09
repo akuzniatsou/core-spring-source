@@ -1,6 +1,7 @@
 package org.epam.university;
 
 import org.epam.university.domain.Client;
+import org.epam.university.domain.Event;
 import org.epam.university.logger.IEventLogger;
 
 /**
@@ -16,8 +17,9 @@ public class App {
         this.eventLogger = eventLogger;
     }
 
-    public void logEvent(String msg) {
-        String message = msg.replaceAll(client.getId(), client.getFullName());
-        eventLogger.logEvent(message);
+    public void logEvent(Event event) {
+        String message = event.getMsg().replaceAll(client.getId(), client.getFullName());
+        event.setMsg(message);
+        eventLogger.logEvent(event);
     }
 }

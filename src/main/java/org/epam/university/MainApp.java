@@ -1,5 +1,6 @@
 package org.epam.university;
 
+import org.epam.university.domain.Event;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -8,12 +9,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class MainApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ApplicationContext context = new ClassPathXmlApplicationContext("org.epam.university/spring.xml");
 
         App app = context.getBean(App.class);
 
-        app.logEvent("Some event for user 1");
-        app.logEvent("Some event for user 2");
+        for (int i = 0; i < 10; i++) {
+            app.logEvent(context.getBean(Event.class));
+            Thread.sleep(1000);
+        }
+
     }
 }
