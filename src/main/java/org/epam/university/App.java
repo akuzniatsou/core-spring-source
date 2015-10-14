@@ -4,6 +4,8 @@ import org.epam.university.domain.Client;
 import org.epam.university.domain.Event;
 import org.epam.university.logger.IEventLogger;
 
+import java.io.IOException;
+
 /**
  * @author Andrei Kuzniatsou
  */
@@ -17,7 +19,7 @@ public class App {
         this.eventLogger = eventLogger;
     }
 
-    public void logEvent(Event event) {
+    public void logEvent(Event event) throws IOException {
         String message = event.getMsg().replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
         eventLogger.logEvent(event);
