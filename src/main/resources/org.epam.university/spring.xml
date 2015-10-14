@@ -6,7 +6,7 @@
 
     <bean id="app" class="org.epam.university.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="consoleEventLogger"/>
+        <constructor-arg ref="cacheFileEventLogger"/>
     </bean>
 
     <bean id="event" class="org.epam.university.domain.Event" scope="prototype">
@@ -25,5 +25,14 @@
     <bean id="dataFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
     <bean id="consoleEventLogger" class="org.epam.university.logger.ConsoleEventLogger"/>
+
+    <bean id="fileEventLogger" class="org.epam.university.logger.FileEventLogger" init-method="init">
+        <constructor-arg value="d:/log.txt"/>
+    </bean>
+
+    <bean id="cacheFileEventLogger" class="org.epam.university.logger.CacheFileEventLogger" init-method="init" destroy-method="destroy" parent="fileEventLogger">
+        <constructor-arg value="3"/>
+    </bean>
+
 
 </beans>
