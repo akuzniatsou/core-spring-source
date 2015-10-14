@@ -1,21 +1,20 @@
 package org.epam.university.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author Andrei Kuzniatsou
  */
 public class Client {
 
+    @Value("${id}")
     private String id;
+    @Value("${name}")
     private String name;
+    @Value("${greeting}")
     private String greeting;
 
-    public Client(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public String getId() {
         return id;
@@ -42,11 +41,13 @@ public class Client {
         this.greeting = greeting;
     }
 
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        return new ToStringBuilder(this)
                 .append("id", id)
                 .append("name", name)
+                .append("greeting", greeting)
                 .toString();
     }
 }

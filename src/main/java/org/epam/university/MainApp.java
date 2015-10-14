@@ -1,9 +1,8 @@
 package org.epam.university;
 
+import org.epam.university.config.AppConfig;
 import org.epam.university.domain.Event;
-import org.epam.university.domain.EventType;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 
@@ -13,12 +12,13 @@ import java.io.IOException;
 public class MainApp {
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("org/epam/university/spring.xml");
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         App app = context.getBean(App.class);
 
         for (int i = 0; i < 10; i++) {
-            app.logEvent(EventType.INFO, context.getBean(Event.class));
+            app.logEvent(null, context.getBean(Event.class));
             Thread.sleep(1000);
         }
 
