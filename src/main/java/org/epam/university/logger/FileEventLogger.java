@@ -3,6 +3,7 @@ package org.epam.university.logger;
 import org.apache.commons.io.FileUtils;
 import org.epam.university.domain.Event;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ public class FileEventLogger implements IEventLogger {
     private File file;
     private String path;
 
+    @PostConstruct
     private void init() {
         this.file = new File(path);
     }

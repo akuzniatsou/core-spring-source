@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @author Andrei Kuzniatsou
@@ -19,6 +20,7 @@ public class Event {
     public Event(Date date, DateFormat dateFormat) {
         this.date = date;
         this.dateFormat = dateFormat;
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
     }
 
     public int getId() {
