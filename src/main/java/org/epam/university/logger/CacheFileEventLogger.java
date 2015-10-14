@@ -2,6 +2,7 @@ package org.epam.university.logger;
 
 import org.epam.university.domain.Event;
 
+import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class CacheFileEventLogger extends FileEventLogger {
         }
     }
 
+    @PreDestroy
     private void destroy() throws IOException {
         if (!cache.isEmpty()) {
             writeEventsFromCache();
