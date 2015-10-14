@@ -9,7 +9,6 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <context:annotation-config/>
-    <import resource="classpath:org/epam/university/loggers.xml"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -23,12 +22,9 @@
         </property>
     </bean>
 
-    <bean id="app" class="org.epam.university.App"/>
-
-    <util:map id="loggerMap">
-        <entry key="INFO" value-ref="consoleEventLogger" />
-        <entry key="ERROR" value-ref="combinedEventLogger" />
-    </util:map>
+    <bean id="app" class="org.epam.university.App">
+        <property name="eventLogger" value="#{T(org.epam.university.domain.Event).isDay() ? consoleEventLogger : fileEventLogger}"/>
+    </bean>
 
     <bean id="event" class="org.epam.university.domain.Event" scope="prototype">
         <constructor-arg>
@@ -38,14 +34,12 @@
         <property name="msg" value="Some event for user 1"/>
     </bean>
 
-    <bean id="client" class="org.epam.university.domain.Client">
-        <constructor-arg value="${id}"/>
-        <constructor-arg value="${name}"/>
-        <property name="greeting" value="${greeting}"/>
+    <bean id="dataFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+
+    <bean id="monitor" class="org.epam.university.Monitor" depends-on="app">
+        <property name="logger" value="#{app.eventLogger}"/>
     </bean>
 
-    <bean id="dataFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
-    <bean id="monitoring" class="org.epam.university.Monitor" depends-on="app"/>
     <bean id="aware" class="org.epam.university.Aware" depends-on="app"/>
 
 

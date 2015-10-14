@@ -17,8 +17,9 @@ public class App {
 
     @Autowired
     private Client client;
-    @Resource(name = "consoleEventLogger")
+
     private IEventLogger eventLogger;
+
     @Resource(name = "loggerMap")
     private Map<EventType, IEventLogger> loggers;
 
@@ -30,5 +31,13 @@ public class App {
         String message = event.getMsg().replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
         logger.logEvent(event);
+    }
+
+    public void setEventLogger(IEventLogger eventLogger) {
+        this.eventLogger = eventLogger;
+    }
+
+    public IEventLogger getEventLogger() {
+        return eventLogger;
     }
 }

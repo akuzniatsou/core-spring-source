@@ -2,6 +2,8 @@ package org.epam.university.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -43,6 +45,11 @@ public class Event {
         this.date = date;
     }
 
+    public static boolean isDay() {
+        DateTime dateTime = DateTime.now(DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+3")));
+        int hourOfDay = dateTime.getHourOfDay();
+        return hourOfDay > 8 && hourOfDay < 17;
+    }
 
     @Override
     public String toString() {
