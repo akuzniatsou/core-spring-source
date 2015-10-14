@@ -18,7 +18,7 @@ public class MainApp {
         App app = context.getBean(App.class);
 
         for (int i = 0; i < 10; i++) {
-            app.logEvent(EventType.ERROR, context.getBean(Event.class));
+            app.logEvent(EventType.INFO, context.getBean(Event.class));
             Thread.sleep(1000);
         }
 
