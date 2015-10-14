@@ -12,7 +12,7 @@ import java.io.IOException;
 public class MainApp {
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("org.epam.university/spring.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("org/epam/university/spring.xml");
 
         App app = context.getBean(App.class);
 

@@ -4,6 +4,8 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
+    <import resource="classpath:org/epam/university/loggers.xml"/>
+
     <bean id="app" class="org.epam.university.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="cacheFileEventLogger"/>
@@ -23,16 +25,7 @@
     </bean>
 
     <bean id="dataFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
-
-    <bean id="consoleEventLogger" class="org.epam.university.logger.ConsoleEventLogger"/>
-
-    <bean id="fileEventLogger" class="org.epam.university.logger.FileEventLogger" init-method="init">
-        <constructor-arg value="d:/log.txt"/>
-    </bean>
-
-    <bean id="cacheFileEventLogger" class="org.epam.university.logger.CacheFileEventLogger" init-method="init" destroy-method="destroy" parent="fileEventLogger">
-        <constructor-arg value="3"/>
-    </bean>
+    <bean id="monitoring" class="org.epam.university.Monitoring" depends-on="app"/>
 
 
 </beans>
