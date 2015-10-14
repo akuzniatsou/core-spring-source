@@ -1,6 +1,7 @@
 package org.epam.university;
 
 import org.epam.university.domain.Event;
+import org.epam.university.domain.EventType;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -17,7 +18,7 @@ public class MainApp {
         App app = context.getBean(App.class);
 
         for (int i = 0; i < 10; i++) {
-            app.logEvent(context.getBean(Event.class));
+            app.logEvent(EventType.ERROR, context.getBean(Event.class));
             Thread.sleep(1000);
         }
 
