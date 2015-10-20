@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <util:properties id="mir" location="classpath:org/epam/booking/auditorium/mir.properties"/>
+    <util:properties id="domKino" location="classpath:org/epam/booking/auditorium/dom_kino.properties"/>
+
+
+    <!--<bean id="auditoriumRepository" class="org.epam.booking.repository.AuditoruimRepository">-->
+        <!--<property name="auditoriumMap">-->
+            <!--<map>-->
+
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <util:map id="auditorium">
+        <entry key="1">
+            <bean class="org.epam.booking.domain.Auditorium">
+                <property name="id" value="1"/>
+                <property name="name" value="#{mir['name']}"/>
+                <property name="seatsNumber" value="#{mir['numberOfSeats']}"/>
+                <property name="vipSeats" value="#{mir['vipSeats'].split(',')}"/>
+            </bean>
+        </entry>
+        <entry key="2">
+            <bean class="org.epam.booking.domain.Auditorium">
+                <property name="id" value="2"/>
+                <property name="name" value="#{domKino['name']}"/>
+                <property name="seatsNumber" value="#{domKino['numberOfSeats']}"/>
+                <property name="vipSeats" value="#{domKino['vipSeats'].split(',')}"/>
+            </bean>
+        </entry>
+    </util:map>
+
+</beans>
