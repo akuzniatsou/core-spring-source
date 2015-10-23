@@ -1,2 +1,3 @@
 rootProject.name = 'core-spring-source'
+include 'booking-service'
 
